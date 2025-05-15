@@ -10,7 +10,7 @@
 npm install
 
 npm run dev
-ˇˇˇ
+```
 http://localhost:5173
 
 Используемые технологии
@@ -26,7 +26,7 @@ CSS, JSX, хуки useState, useEffect, useNavigate
 
 ## 2. Структура проекта:
 
-ˇˇˇ
+```
 src/
 │
 ├── components/
@@ -40,7 +40,7 @@ src/
 ├── main.jsx                  # Точка входа
 └── App.css                   # Стили
 
-ˇˇˇ
+```
 ---
 
 ## 3. Основные функции:
