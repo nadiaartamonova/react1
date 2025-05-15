@@ -1,12 +1,90 @@
-# React + Vite
+# React Quiz App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Интерактивное веб-приложение-викторина, разработанное на **React + Vite**.  
+Пользователь выбирает категорию, отвечает на вопросы и в конце получает статистику.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 1. Установить зависимости:
+```
+npm install
 
-## Expanding the ESLint configuration
+npm run dev
+ˇˇˇ
+http://localhost:5173
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Используемые технологии
+React
+
+Vite
+
+Trivia API
+
+CSS, JSX, хуки useState, useEffect, useNavigate
+
+---
+
+## 2. Структура проекта:
+
+ˇˇˇ
+src/
+│
+├── components/
+│   ├── Quiz.jsx              # Основная логика викторины
+│   ├── QuizSettings.jsx      # Выбор категории
+│   ├── Stats.jsx             # Отображение результатов
+│   ├── Menu.jsx              # Навигация
+│   └── Home.jsx              # Главная страница
+│
+├── App.jsx                   # Основной компонент и маршруты
+├── main.jsx                  # Точка входа
+└── App.css                   # Стили
+
+ˇˇˇ
+---
+
+## 3. Основные функции:
+
+3.1. Выбор категории
+
+Перед стартом викторины пользователь выбирает категорию (например, Science, Movies и т.д.).
+
+Данные загружаются с Open Trivia API
+
+3.2. Викторина
+
+Каждый вопрос имеет таймер (15 секунд).
+
+Пользователь может выбрать только 1 ответ.
+
+После выбора или по истечении времени показывается правильный ответ.
+
+3.3. Статистика
+
+После завершения игры пользователь видит:
+
+Общее количество вопросов
+
+Количество правильных/неправильных
+
+Процент успеха
+
+3.4. Повторная игра
+На экране статистики и главной странице можно начать новую игру, при этом старая статистика сбрасывается.
+
+
+## 4. Валидация и проверки
+
+
+Выбор категории — нельзя начать игру, пока не выбрана категория.
+
+Таймер — ограничение по времени на каждый вопрос.
+
+Клик по ответу — после выбора одного ответа, остальные блокируются.
+
+Ответы подсвечиваются:
+
+Зеленым — правильный
+
+Красным — неправильный выбранный
+
