@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import Menu from './components/Menu';
 import Home from './components/Home';
@@ -9,21 +9,27 @@ import Stats from './components/Stats';
 
 function App() {
   const [categoryId, setCategoryId] = useState(null);
+
+  const [difficulty, setDifficulty] = useState(null);
+  
   const [statsData, setStatsData] = useState(null);
 
-  const handleStartQuiz = (category) => {
+  const handleStartQuiz = (category, difficulty) => {
     setCategoryId(category);
+    setDifficulty(difficulty)
     setStatsData(null); 
   };
 
   const handleFinishQuiz = (stats) => {
     setStatsData(stats);
     setCategoryId(null); 
+    setDifficulty(null); 
   };
 
   const handleRestartQuiz = () => {
     setStatsData(null);
-    setCategoryId(null); 
+    setCategoryId(null);
+    setDifficulty(null);  
   };
 
   return (
@@ -41,9 +47,13 @@ function App() {
           <QuizSettings onStart={handleStartQuiz} />
         )}
 
-        {categoryId && (
-          <Quiz categoryId={categoryId} onFinish={handleFinishQuiz} />
-        )}
+{categoryId && (
+  <Quiz
+    categoryId={categoryId}
+    difficulty={difficulty}
+    onFinish={handleFinishQuiz}
+  />
+)}
       </div>
     </Router>
   );

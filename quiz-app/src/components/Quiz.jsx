@@ -9,8 +9,8 @@ const decodeHtml = (html) => {
   return txt.value;
 };
 
-function Quiz({ categoryId, onFinish  } ) {
-
+function Quiz({ categoryId, difficulty, onFinish  } ) {
+  //console.log(difficulty)
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -30,8 +30,10 @@ function Quiz({ categoryId, onFinish  } ) {
             setLoading(true);
             setError('');
     
+            console.log(difficulty)
             const response = await axios.get(
-              `https://opentdb.com/api.php?amount=5&category=${categoryId}&type=multiple`
+              
+              `https://opentdb.com/api.php?amount=5&category=${categoryId}&type=multiple&difficulty=${difficulty}`
             );
     
             if (response.data.response_code !== 0) {
@@ -58,8 +60,7 @@ function Quiz({ categoryId, onFinish  } ) {
         };
     
         fetchQuestions();
-      }, [categoryId]);
-
+      }, [categoryId, difficulty]);
 
   useEffect(() => {
     setTimer(15);
@@ -157,7 +158,7 @@ function Quiz({ categoryId, onFinish  } ) {
 
       {showAnswers && (
         <button onClick={goToNext} style={{ marginTop: '20px' }}>
-          {current < questions.length - 1 ? 'Следующий вопрос' : 'Завершить'}
+          {current < questions.length - 1 ? 'Next' : 'Finish'}
         </button>
       )}
     </div>

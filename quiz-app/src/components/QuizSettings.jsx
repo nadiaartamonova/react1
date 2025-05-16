@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 function QuizSettings({ onStart }) {
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedDifficulty, setSelectedDifficulty] = useState('')
+  const difficulties = ['easy', 'medium', 'hard'];
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -15,12 +17,14 @@ function QuizSettings({ onStart }) {
       }
     };
 
+
     fetchCategories();
   }, []);
 
   const handleStart = () => {
     if (selectedCategory) {
-      onStart(selectedCategory);
+      //console.log(selectedCategory, selectedDifficulty)
+      onStart(selectedCategory, selectedDifficulty);
     } else {
       alert('please choose another one');
     }
@@ -35,10 +39,27 @@ function QuizSettings({ onStart }) {
         value={selectedCategory}
         onChange={(e) => setSelectedCategory(e.target.value)}
       >
-        <option value="">-- choose --</option>
-        {categories.map((cat) => (
+        {categories && categories.length > 0 ? (
+        categories.map((cat) => (
           <option key={cat.id} value={cat.id}>
             {cat.name}
+          </option>
+        ))
+      ) : (
+        <option disabled>Категории не найдены</option>
+      )}
+</select>
+      <br></br>
+      <label htmlFor="difficulty">choose difficulty </label>
+      <select
+        id="difficulty"
+        value={selectedDifficulty}
+        onChange={(e) => setSelectedDifficulty(e.target.value)}
+      >
+        <option value="">-- choose --</option>
+        {difficulties.map((diff) => (
+          <option key={diff} value={diff}>
+          {diff}
           </option>
         ))}
       </select>
